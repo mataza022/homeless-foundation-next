@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search, ChevronDown, Home, User, Heart, Briefcase, Phone } from "lucide-react";
+import { Menu, X, Search, ChevronDown, Home, User, Heart, Briefcase, Phone, FileText, HandHeart } from "lucide-react";
 import TopBar from "./TopBar";
 import DonationModal from "./DonationModal";
 
@@ -11,7 +11,27 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDonateOpen, setIsDonateOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
+
+  const searchItems = [
+    { title: "Home", url: "/", type: "Page" },
+    { title: "About Us", url: "/about", type: "Page" },
+    { title: "Children Empowerment Wing", url: "/children", type: "Wing" },
+    { title: "Youth Empowerment Wing", url: "/youth", type: "Wing" },
+    { title: "Women Empowerment Wing", url: "/women", type: "Wing" },
+    { title: "All Projects & Global Fundraising", url: "/projects", type: "Page" },
+    { title: "Privacy Policy", url: "/privacy", type: "Page" },
+    { title: "Volunteer Form", url: "/#contact", type: "Page" },
+    { title: "Widows in Hospital Program", url: "/women", type: "Program" },
+    { title: "Maweni Rescue Home", url: "/children", type: "Project" },
+    { title: "Special School for Disabled Children", url: "/projects", type: "Project" },
+    { title: "Donate via M-PESA", url: "#", type: "Action" },
+  ];
+
+  const filteredSearch = searchQuery.length > 0 
+    ? searchItems.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    : [];
 
   useEffect(() => {
     const handleOpenModal = () => setIsDonateOpen(true);
@@ -22,32 +42,49 @@ export default function Navbar() {
   useEffect(() => {
     setIsOpen(false);
     setIsSearchOpen(false);
+    setSearchQuery("");
   }, [pathname]);
 
   useEffect(() => {
-    if (isOpen || isSearchOpen) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
     return () => { document.body.style.overflow = "unset"; };
-  }, [isOpen, isSearchOpen]);
+  }, [isOpen]);
 
   const toggleSubmenu = (name: string) => {
     setOpenSubmenu(openSubmenu === name ? null : name);
+  };
+
+  const handleSearchAction = (item: any) => {
+    if (item.type === "Action" && item.title === "Donate via M-PESA") {
+      setIsSearchOpen(false);
+      setIsDonateOpen(true);
+    }
   };
 
   return (
     <div className="sticky top-0 z-50 flex flex-col w-full">
       <TopBar />
       
+      {/* Quick Links Bar (Now says Volunteer) */}
+      <div className="bg-white border-b border-gray-100 py-2 md:py-3 w-full">
+        <div className="container mx-auto px-4 flex justify-center items-center text-xs md:text-sm font-semibold text-primary">
+          <a href="/#contact" className="flex items-center gap-2 hover:text-accent transition">
+            <HandHeart size={14} className="md:w-4 md:h-4" /> Volunteer
+          </a>
+        </div>
+      </div>
+
       <header className="bg-white shadow-sm w-full relative z-50">
-        <div className="w-full px-4 md:px-8 h-20 flex items-center justify-between">
+        <div className="w-full px-4 md:px-8 h-20 md:h-28 flex items-center justify-between">
           
-          <Link href="/" className="flex items-center gap-3">
-            <img src="/assets/logo.jpeg" alt="Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shrink-0" />
-            <span className="font-serif text-sm md:text-lg lg:text-xl font-bold text-primary leading-tight">
-              Homeless Child and Widows Foundation
+          <Link href="/" className="flex flex-row items-center gap-3 md:gap-4">
+            <img src="/assets/logo.jpeg" alt="Logo" className="h-16 w-16 md:h-16 md:w-16 lg:h-20 lg:w-20 object-contain shrink-0" />
+            <span className="font-serif text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-primary leading-tight">
+              Homeless Child &<br className="md:hidden"/> Widows Foundation
             </span>
           </Link>
           
@@ -67,14 +104,21 @@ export default function Navbar() {
             </div>
             
             <Link href="/projects" className="hover:text-accent transition">Projects</Link>
-            <Link href="/#contact" className="hover:text-accent transition">Contact</Link>
+            
+            {/* Desktop Navbar keeps Contact */}
+            <a href="/#contact" className="hover:text-accent transition">Contact</a>
+            
+            <button type="button" onClick={() => setIsSearchOpen(!isSearchOpen)} className="text-primary hover:text-accent transition p-2 cursor-pointer">
+              <Search size={20} />
+            </button>
+
             <button onClick={() => setIsDonateOpen(true)} className="bg-accent text-white px-6 py-2.5 rounded-lg hover:bg-opacity-90 transition font-semibold shadow-md">
               Donate
             </button>
           </nav>
 
-          <div className="flex lg:hidden items-center gap-2">
-            <button type="button" onClick={() => setIsSearchOpen(true)} className="text-primary hover:text-accent transition p-2 cursor-pointer">
+          <div className="flex lg:hidden items-center gap-1">
+            <button type="button" onClick={() => setIsSearchOpen(!isSearchOpen)} className="text-primary hover:text-accent transition p-2 cursor-pointer">
               <Search size={24} />
             </button>
             <button type="button" onClick={() => setIsOpen(true)} className="text-primary hover:text-accent transition p-2 cursor-pointer">
@@ -82,29 +126,73 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Search Dropdown */}
+        {isSearchOpen && (
+          <div className="absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg p-4 z-[100]">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center gap-4 border border-gray-300 rounded-lg px-4 py-3">
+                <Search size={20} className="text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="Search pages, projects, actions..." 
+                  className="flex-1 outline-none text-gray-800" 
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button onClick={() => { setIsSearchOpen(false); setSearchQuery(""); }} className="text-gray-500 hover:text-accent">
+                  <X size={20} />
+                </button>
+              </div>
+              
+              {searchQuery.length > 0 && (
+                <div className="mt-4 flex flex-col gap-2 max-h-[60vh] overflow-y-auto">
+                  {filteredSearch.length > 0 ? (
+                    filteredSearch.map((item, idx) => (
+                      item.type === "Action" ? (
+                        <button 
+                          key={idx} 
+                          onClick={() => handleSearchAction(item)}
+                          className="flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition text-left"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Heart size={18} className="text-accent" />
+                            <span className="font-medium text-gray-800">{item.title}</span>
+                          </div>
+                        </button>
+                      ) : (
+                        <a 
+                          key={idx} 
+                          href={item.url}
+                          onClick={() => setIsSearchOpen(false)}
+                          className="flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+                        >
+                          <div className="flex items-center gap-3">
+                            <FileText size={18} className="text-primary" />
+                            <span className="font-medium text-gray-800">{item.title}</span>
+                          </div>
+                          <span className="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-1 rounded">{item.type}</span>
+                        </a>
+                      )
+                    ))
+                  ) : (
+                    <p className="text-gray-500 p-3">No results found for "{searchQuery}".</p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* Mobile Search Overlay */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 z-[100] bg-white flex flex-col">
-          <div className="p-4 flex items-center gap-4 border-b border-gray-200">
-            <Search size={24} className="text-gray-400" />
-            <input type="text" placeholder="Search the site..." className="flex-1 text-lg outline-none text-gray-800" autoFocus />
-            <button onClick={() => setIsSearchOpen(false)} className="p-2 bg-gray-100 rounded-lg text-gray-600">
-              <X size={24} />
-            </button>
-          </div>
-          <div className="p-6 text-center text-gray-500">Type to search for projects, pages, or information.</div>
-        </div>
-      )}
-
-      {/* Mobile Menu Overlay (Forest Green header) */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="fixed inset-0 z-[100] bg-white flex flex-col lg:hidden">
           <div className="bg-primary text-white p-4 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
-              <img src="/assets/logo.jpeg" alt="Logo" className="h-10 w-10 rounded-full border-2 border-white/20 bg-white" />
-              <span className="font-serif font-bold text-lg leading-tight tracking-wide">HOMELESS CHILD AND WIDOWS FOUNDATION</span>
+              <img src="/assets/logo.jpeg" alt="Logo" className="h-14 w-14 object-contain rounded-full bg-white" />
+              <span className="font-serif font-bold text-sm sm:text-base leading-tight">HOMELESS CHILD & WIDOWS FOUNDATION</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition">
               <X size={24} />
@@ -161,7 +249,8 @@ export default function Navbar() {
                 <ChevronDown size={20} className="text-gray-400" />
               </Link>
 
-              <Link href="/#contact" className="flex items-center justify-between p-4 group">
+              {/* Mobile Navbar keeps Contact */}
+              <a href="/#contact" onClick={() => setIsOpen(false)} className="flex items-center justify-between p-4 group">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white transition">
                     <Phone size={20} />
@@ -169,7 +258,7 @@ export default function Navbar() {
                   <span className="text-lg font-medium text-gray-800">Contact</span>
                 </div>
                 <ChevronDown size={20} className="text-gray-400" />
-              </Link>
+              </a>
             </nav>
           </div>
 

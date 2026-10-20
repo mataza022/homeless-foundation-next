@@ -10,7 +10,7 @@ export default function YouthWing() {
       <section className="relative w-full bg-primary text-white py-32 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: "url('/assets/home.jpeg')" }}
+          style={{ backgroundImage: "url('/assets/youthempowerment.jpg')" }}
         ></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">Youth Empowerment Wing</h1>
@@ -32,7 +32,10 @@ export default function YouthWing() {
           </p>
 
           <div className="mt-10 text-center">
-            <button onClick={() => window.dispatchEvent(new Event("open-donation-modal"))} className="bg-accent text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition shadow-lg inline-block">Support the Youth Wing</button>
+            {/* Changed from Link to Button with Event Trigger */}
+            <button onClick={() => window.dispatchEvent(new Event("open-donation-modal"))} className="bg-accent text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition shadow-lg inline-block">
+              Support the Youth Wing
+            </button>
           </div>
         </div>
       </section>

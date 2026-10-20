@@ -32,11 +32,20 @@ export default function DonationModal({ isOpen, onClose }: { isOpen: boolean, on
           </div>
 
           <div className="flex justify-between items-center bg-white p-3 rounded-md border-l-4 border-accent mb-6 shadow-sm">
-            <span>Account Number: <strong className="text-lg">Your Two Names</strong></span>
+            <span>Account Number: <strong className="text-lg uppercase">RESCUE CENTRE</strong></span>
           </div>
           
           <p className="font-semibold mb-2">4. Enter Amount</p>
           <p className="font-semibold mb-2">5. Enter M-PESA PIN and Confirm</p>
+        </div>
+
+        {/* WhatsApp Confirmation Note */}
+        <div className="bg-[#25D366]/10 border-l-4 border-[#25D366] p-4 mt-6 rounded-r-md">
+          <p className="text-sm text-gray-700">
+            <strong>After sending, please WhatsApp your transaction code to </strong> 
+            <a href="https://wa.me/254712555336" className="text-[#1ebe5b] font-bold hover:underline">+254 712 555 336</a> 
+            <strong> so we can acknowledge your donation.</strong>
+          </p>
         </div>
 
         <button onClick={onClose} className="w-full bg-accent text-white py-3 rounded-lg font-bold mt-6 hover:bg-opacity-90 transition">Close</button>
