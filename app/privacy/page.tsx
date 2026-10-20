@@ -2,13 +2,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function PrivacyPage() {
+  const currentYear = 2026; // Hardcoded to fix Next.js build error
+
   return (
     <main className="min-h-screen flex flex-col bg-[#FBF7F0]">
       <Navbar />
       
       <section className="bg-primary text-white py-16 px-6 text-center">
         <h1 className="font-serif text-4xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-gray-200">Last updated: {new Date().getFullYear()}</p>
+        <p className="text-gray-200">Last updated: January {currentYear}</p>
       </section>
 
       <section className="py-20 px-6 container mx-auto max-w-3xl">
