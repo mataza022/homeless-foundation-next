@@ -93,12 +93,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+      <div className="container mx-auto px-6 mt-16 pt-8 border-t border-white/10 flex justify-center items-center text-xs text-gray-400 gap-4">
         <p>
           &copy; {currentYear} Homeless Child & Widows Support Centre. All rights reserved.
-        </p>
-        <p>
-          Created by <span className="text-secondary font-semibold">Webora Digital Solutions</span>
         </p>
       </div>
     </footer>

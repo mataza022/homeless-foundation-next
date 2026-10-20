@@ -31,8 +31,8 @@ export default function Home() {
     <main className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Reduced padding and margins for a much shorter mobile hero */}
-      <section id="home" className="relative bg-primary text-white pt-10 pb-16 md:py-32 overflow-hidden">
+      {/* Reduced desktop padding from md:py-32 to md:py-20 */}
+      <section id="home" className="relative bg-primary text-white pt-10 pb-16 md:py-20 overflow-hidden">
         {backgrounds.map((bg, index) => (
           <div
             key={index}
@@ -43,40 +43,44 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a150f] via-[#0a150f]/80 to-transparent"></div>
 
         <div className="relative z-10 container mx-auto px-6 w-full flex flex-col items-start text-left">
-          <div className="flex items-center gap-3 mb-2 md:mb-6">
-            <span className="w-6 md:w-12 h-[2px] bg-accent"></span>
-            <span className="text-accent tracking-widest text-[10px] md:text-sm font-semibold uppercase">Our Mission</span>
+          <div className="flex items-center gap-3 mb-2 md:mb-4">
+            <span className="w-6 md:w-12 h-[2px] !bg-white"></span>
+            <span className="!text-white tracking-widest text-[10px] md:text-sm font-semibold uppercase">Our Mission</span>
           </div>
 
-          <h1 className="font-serif text-3xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-6 leading-tight max-w-4xl">
+          {/* Reduced heading margin */}
+          <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-5 leading-tight max-w-4xl">
             Rescuing Homeless <br className="hidden md:block"/> Children & Empowering <br className="hidden md:block"/> Widows in Kenya.
           </h1>
           
-          <p className="text-sm md:text-xl text-gray-300 mb-6 md:mb-10 max-w-2xl leading-relaxed">
+          {/* Reduced paragraph margin */}
+          <p className="text-sm md:text-lg text-gray-300 mb-6 md:mb-8 max-w-2xl leading-relaxed">
             The Homeless Child and Widows Foundation is dedicated to transforming lives through child rescue initiatives and widow empowerment programs across Kenya. We provide shelter, education, and sustainable support.
           </p>
 
           <div className="flex flex-row gap-3 w-full md:w-auto">
-            <button onClick={triggerDonate} className="flex-1 md:flex-none bg-accent text-white px-4 md:px-8 py-3 md:py-4 rounded-lg font-bold text-sm md:text-lg hover:bg-opacity-90 transition shadow-lg">
+            <button onClick={triggerDonate} className="flex-1 md:flex-none bg-accent text-white px-4 md:px-8 py-3 md:py-3.5 rounded-lg font-bold text-sm md:text-base hover:bg-opacity-90 transition shadow-lg">
               Donate Now
             </button>
-            <Link href="/about" className="flex-1 md:flex-none bg-black/30 border border-white/30 backdrop-blur-sm text-white px-4 md:px-8 py-3 md:py-4 rounded-lg font-bold text-sm md:text-lg hover:bg-white hover:text-primary transition flex items-center justify-center gap-2 shadow-lg">
-              About Us <ArrowRight size={16} className="md:w-[18px] md:h-[18px]" />
-            </Link>
+            <a href="tel:+254712555336" className="flex-1 md:flex-none bg-[#152a1d] hover:bg-[#0a150f] text-white px-4 md:px-8 py-3 md:py-3.5 rounded-lg font-bold text-sm md:text-base text-center transition flex items-center justify-center shadow-lg">
+              Call Us
+            </a>
+            <a href="https://wa.me/254712555336" target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none bg-[#25D366] hover:bg-[#1ebe5b] text-white px-4 md:px-8 py-3 md:py-3.5 rounded-lg font-bold text-sm md:text-base text-center transition flex items-center justify-center shadow-lg">
+              WhatsApp
+            </a>
           </div>
         </div>
 
-        {/* Slider Controls - moved slightly up on mobile to save space */}
-        <div className="absolute bottom-4 right-4 md:bottom-10 md:right-10 z-20 flex items-center gap-3 md:gap-6">
+        <div className="absolute bottom-4 right-4 md:bottom-8 md:right-10 z-20 flex items-center gap-3 md:gap-6">
           <div className="flex items-center gap-1 md:gap-2 font-mono text-[10px] md:text-sm">
             <span className="text-white">0{currentBg}</span>
             <span className="text-gray-400">/ 0{backgrounds.length}</span>
           </div>
           <div className="flex gap-1 md:gap-2">
-            <button onClick={prevBg} className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition">
+            <button onClick={prevBg} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition">
               <ChevronLeft size={16} className="md:w-5 md:h-5" />
             </button>
-            <button onClick={nextBg} className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-accent text-white flex items-center justify-center hover:bg-opacity-90 transition">
+            <button onClick={nextBg} className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent text-white flex items-center justify-center hover:bg-opacity-90 transition">
               <ChevronRight size={16} className="md:w-5 md:h-5" />
             </button>
           </div>
