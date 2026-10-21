@@ -1,0 +1,19 @@
+# Homeless Child & Widows Foundation
+
+> A registered Kenyan NGO dedicated to rescuing homeless children and empowering widows. We provide shelter, education, and sustainable support, and run the Maweni Rescue Home.
+
+## Main Pages
+- [Home](https://homelesschildandwidowfoundation.org): Overview of our mission, 5 key operation areas, and 3 empowerment wings.
+- [About Us](https://homelesschildandwidowfoundation.org/about): Our history since 2020, our team, and the locations we operate in.
+- [Projects](https://homelesschildandwidowfoundation.org/projects): Details on the Maweni Rescue Home, Widow Business Startup, and our goal to build a Technical College.
+
+## Empowerment Wings
+- [Children Empowerment](https://homelesschildandwidowfoundation.org/children): Focused on orphans, homeless, disabled, and vulnerable children.
+- [Youth Empowerment](https://homelesschildandwidowfoundation.org/youth): Providing grants, education, and support for youth-led projects.
+- [Women Empowerment](https://homelesschildandwidowfoundation.org/women): Supporting widows through skills training, microfinance, and the Widows in Hospital Program.
+
+## Contact & Donation
+- Phone: +254 712 555 336 / +254 733 181 830
+- Email: homelesschild.rescuefoundation@gmail.com
+- Location: Kongowea Maweni, Behind Sineno Primary School, Mombasa, Kenya
+- Donation Method: M-PESA Paybill 4098209, Account: RESCUE CENTRE
