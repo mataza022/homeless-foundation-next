@@ -69,7 +69,6 @@ export default function Footer() {
           <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Follow Our Channels</h4>
           <ul className="space-y-4 text-sm">
             <li>
-              {/* Updated to the new Main Channel */}
               <a href="https://whatsapp.com/channel/0029VaFUnasBKfhsZXDEei3n" target="_blank" className="hover:text-secondary transition flex items-center gap-3 font-semibold text-white">
                 <MessageCircle size={18} className="text-secondary" /> Main WhatsApp Channel
               </a>
@@ -85,6 +84,12 @@ export default function Footer() {
             <li>
               <a href="https://whatsapp.com/channel/0029Vb8Oho9ATRSeLI3E5Y2Y" target="_blank" className="hover:text-secondary transition flex items-center gap-3">
                 <MessageCircle size={18} className="text-secondary" /> Old Age Management Channel
+              </a>
+            </li>
+            <li>
+              {/* RESTORED PHOTO GALLERY */}
+              <a href="https://photos.app.goo.gl/pAPa5cNk598MantH8" target="_blank" className="hover:text-secondary transition flex items-center gap-3">
+                <ImageIcon size={18} className="text-secondary" /> Photo Gallery
               </a>
             </li>
             <li>
